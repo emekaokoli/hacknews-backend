@@ -1,0 +1,28 @@
+{
+  "name": "hackrnew-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "consola": "^2.15.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "http-errors": "^2.0.0",
+    "joi": "^17.6.0",
+    "lodash": "^4.17.21",
+    "mongodb": "^4.5.0",
+    "mongoose": "^6.3.0",
+    "morgan": "^1.10.0",
+    "node-fetch": "2.6.6"
+  },
+  "scripts": {
+    "start": "set NODE_ENV=production&&node ./src/utils/start-server.utils",
+    "dev": "set NODE_ENV=development&&nodemon ./src/utils/start-server.utils",
+    "lint": "eslint --fix --cache"
+  },
+  "devDependencies": {
+    "eslint": "^8.32.0",
+    "nodemon": "^2.0.16"
+  }
+}
