@@ -7,6 +7,10 @@ Directory
 src
  ┣ controllers
  ┃ ┗ news.controller.js
+ ┣ jobs
+ ┃ ┣ fetchPosts.js
+ ┃ ┣ index.js
+ ┃ ┗ scheduler.js
  ┣ middleware
  ┃ ┗ validate.routes.middleware.js
  ┣ models
@@ -19,10 +23,8 @@ src
  ┃ ┗ news.service.js
  ┣ utils
  ┃ ┣ db.connect.utils.js
- ┃ ┣ schedulePostSync.util.js
  ┃ ┗ start-server.utils.js
- ┣ app.js
- ┗ README.md
+ ┗ app.js
  ```
 # Features 
 - `GET` gets all stories categorised by `new` `top ` and  `best` stories.
@@ -47,10 +49,9 @@ clone the repo and `yarn install` to install the project dependencies and then
 
 `yarn dev ` to start the app in production
 
-# Scheduled posts
-in the utils directory under the src folder, there is a file named `start-server.utils.js` which contains the api key and the api url.
-uncomment the lines in the file to use the the `schedulePostsSync()`function this starts the `scheduler that fetches posts every 5 mins`.
 
+# Dependency
+The server needs environment for db connection string and port number.
 
 ## about the developer
 Emeka Okoli

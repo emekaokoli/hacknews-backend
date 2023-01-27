@@ -1,12 +1,11 @@
-const app = require('../app');
 const env = require('dotenv').config();
+const app = require('../app');
 const http = require('http');
 const consola = require('consola');
 
-const {schedulePostsSync} = require('../utils/schedulePostSync.util');
+const { scheduleJobs } = require('../jobs');
 
-schedulePostsSync();
-
+const scheduler = scheduleJobs();
 
 const startServer = async () => {
   try {
@@ -19,6 +18,7 @@ const startServer = async () => {
     );
   } catch (error) {
     consola.error(error.message);
+    scheduler.stop();
     process.exit();
   }
 };

@@ -1,31 +1,32 @@
 const createError = require('http-errors');
 
 const {
-  postNews,
   findItemsByType,
   thirdPartyPosts,
 } = require('../services/news.service');
-const { getStories } = require('../utils/schedulePostSync.util');
-
-
 
 const getNewsHandlerByType = async (req, res, next) => {
-  const { category } = req.query;
+  const DEFAULT_CATEGORY = 'top';
+  const {
+    category = DEFAULT_CATEGORY,
+    page: _page,
+    limit: _limit,
+  } = req.query;
 
   try {
-    const page = parseInt(req.query.page || 0);
-    const limit = parseInt(req.query.limit || 30);
-    const skip = parseInt(page * limit);
+    const page = parseInt(_page || 1);
+    const limit = parseInt(_limit || 30);
+    const skip = (page - 1) * limit;
 
-    const {totalRecord, results} = await findItemsByType(category, skip, limit);
-  
+    const { totalRecord, results } = await findItemsByType(
+      category,
+      skip,
+      limit
+    );
+
     const pages = Math.ceil(totalRecord / limit);
-    const prevPage = parseInt(page - 1);
-    const nextPage = parseInt(page + 1);
-
-    if (page > pages) {
-      return next(createError.NotFound('Page not found'));
-    }
+    const prevPage = page > 1 ? page - 1 : undefined;
+    const nextPage = page + 1;
 
     return res.status(200).json({
       success: true,
@@ -33,7 +34,7 @@ const getNewsHandlerByType = async (req, res, next) => {
       pages,
       prevPage,
       nextPage,
-      data: results,
+      data: page <= pages ? results : [],
     });
   } catch (error) {
     return next(error);
@@ -62,21 +63,7 @@ async function thirdPartyPostHandler(req, res, next) {
   }
 }
 
-async function postNewsHandler(req, res, next) {
-  const { type } = req.params;
-  try {
-    await getStories(type);
-
-    return res.status(200).json({
-      success: true,
-    });
-  } catch (error) {
-    return next(error);
-  }
-}
-
 module.exports = {
-  postNewsHandler,
   getNewsHandlerByType,
   thirdPartyPostHandler,
 };

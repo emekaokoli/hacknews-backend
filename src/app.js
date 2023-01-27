@@ -19,13 +19,13 @@ app.use('/api/v1/news', require('./routes/news.routes'))
 app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;
-  next(404);
+  next(err.status || 404);
 });
 
 app.use((err, req, res, next) =>
   res.status(err.statusCode || 500).send({
     success: false,
-    message: err.stack,
+    message: err.message,
   })
 );
 

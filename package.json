@@ -14,7 +14,8 @@
     "mongodb": "^4.5.0",
     "mongoose": "^6.3.0",
     "morgan": "^1.10.0",
-    "node-fetch": "2.6.6"
+    "node-fetch": "2.6.6",
+    "toad-scheduler": "^2.2.0"
   },
   "scripts": {
     "start": "set NODE_ENV=production&&node ./src/utils/start-server.utils",

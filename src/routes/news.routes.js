@@ -1,9 +1,7 @@
 const express = require('express');
 const {
-  postNewsHandler,
   getNewsHandlerByType,
   thirdPartyPostHandler,
-
 } = require('../controllers/news.controller');
 const router = express.Router();
 
@@ -14,8 +12,6 @@ const {
 router
   .route('/')
   .get(getNewsHandlerByType)
-  .post(validateEntity, postNewsHandler);
-
-router.route('/articles').post(validateEntity, thirdPartyPostHandler);
+  .post(validateEntity, thirdPartyPostHandler);
 
 module.exports = router;
