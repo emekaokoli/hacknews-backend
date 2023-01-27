@@ -51,7 +51,7 @@ clone the repo and `yarn install` to install the project dependencies and then
 
 
 # Dependency
-The server needs environment for db connection string and port number.
+The server needs environment variable for db connection string and port number.
 
 ## about the developer
 Emeka Okoli
